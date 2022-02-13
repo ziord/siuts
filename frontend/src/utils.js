@@ -13,10 +13,9 @@ export const makeFetch = async (endpoint, method, payload, timeout = 10000) => {
 };
 
 export const eUrl = () => {
-  if (window.location.origin.includes("localhost")) {
-    return "http://localhost:5000";
-  }
-  return "";
+  return window.location.origin.includes("localhost")
+    ? "http://localhost:5000"
+    : "";
 };
 
 export const getLocCode = async () => {

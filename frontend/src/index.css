@@ -7,6 +7,9 @@
   --body-font-size: 20px;
   --widget-width: 620px; /*600px*/
   --widget-height: 48px; /*45px*/
+  --widget-width-small: 300px;
+  --widget-height-small: 40px;
+  --font-size-small: 15px;
 }
 
 * {
@@ -134,8 +137,8 @@ html {
   flex-flow: column;
   justify-content: flex-start;
   align-items: center;
-  min-height: 80vh;
-  margin-top: 120px;
+  min-height: 100vh;
+  margin-top: 150px;
   row-gap: 15px;
 }
 
@@ -150,8 +153,6 @@ html {
 
 .search input[type="text"] {
   border: 2px solid var(--highlight-color);
-  /* border: 2px solid rgb(252, 175, 76); */
-  /* height:420px; */
   width: var(--widget-width);
   height: var(--widget-height);
   border-radius: 6px;
@@ -196,15 +197,15 @@ html {
   font-size: 18px;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 480px) {
   .search {
     row-gap: 12px;
   }
 
   .search input[type="text"] {
-    width: 250px;
+    width: var(--widget-width-small);
     height: 35px;
-    font-size: 12px;
+    font-size: var(--font-size-small);
   }
 
   ::placeholder {
@@ -212,16 +213,35 @@ html {
   }
 
   .search button {
-    width: 250px;
+    width: var(--widget-width-small);
     height: 40px;
-    font-size: 15px;
+    font-size: var(--font-size-small);
   }
 
   .custom {
     display: flex;
     align-items: center;
-    max-width: 250px;
-    font-size: 15px;
+    max-width: var(--widget-width-small);
+    font-size: var(--font-size-small);
+  }
+}
+
+@media only screen and (min-width: 481px) and (max-width: 767px) {
+  .search input[type="text"] {
+    width: 400px;
+    height: var(--widget-height-small);
+
+  }
+
+  .search button {
+    width: 400px;
+    height: var(--widget-height-small);
+  }
+
+  .custom {
+    display: flex;
+    align-items: center;
+    max-width: var(--widget-height-small);
   }
 }
 
@@ -258,10 +278,6 @@ html {
   text-decoration: none;
   color: #b1cffa;
 }
-
-/* .footer-image {
-  
-} */
 
 .product-item {
   display: flex;
@@ -410,34 +426,34 @@ html {
 
 @keyframes loader {
   0% {
-      transform: translateX(0);
+    transform: translateX(0);
   }
   15% {
-      transform: translateX(230px);
+    transform: translateX(230px);
   }
   45% {
-      transform: translateX(230px);
+    transform: translateX(230px);
   }
   65% {
-      transform: translateX(0);
+    transform: translateX(0);
   }
 }
 @keyframes loading-text {
   0% {
-      content: "Processing";
+    content: "Processing";
   }
   25% {
-      content: "Processing.";
+    content: "Processing.";
   }
   50% {
-      content: "Processing..";
+    content: "Processing..";
   }
   75% {
-      content: "Processing...";
+    content: "Processing...";
   }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 480px) {
   .about {
     text-align: left;
     padding: 20px;

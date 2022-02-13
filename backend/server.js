@@ -20,6 +20,9 @@ app.use(express.urlencoded({ extended: true }));
 // enable cors
 app.use(cors());
 
+app.use("/api/url", urlRoutes);
+app.use("/api/product", productRoutes);
+
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(BUILD));
   app.use("*", (req, res) => {
@@ -29,5 +32,3 @@ if (process.env.NODE_ENV === "production") {
   app.get("/", (req, res) => res.send("Waiting for production..."));
 }
 
-app.use("/api/url", urlRoutes);
-app.use("/api/product", productRoutes);

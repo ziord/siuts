@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 // enable cors
 app.use(cors());
 
-if (process.env.NODE_ENV === "prod") {
+if (process.env.NODE_ENV === "production") {
   app.use(express.static(BUILD));
   app.use("*", (req, res) => {
     res.sendFile(path.join(BUILD, "index.html"));

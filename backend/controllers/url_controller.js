@@ -3,7 +3,7 @@ const { getPartialUrl } = require("../config/conf");
 const Url = require("../models/url_model");
 
 //
-const PUNCT = /['!"$\\'()\*,;<>@\[\\\]\^`{|}']/g;
+const PUNCT = /['!"$\\'()\*;<>@\[\\\]\^`{|}']/g;
 const SPACES = [" ", "\t", "\n", "\r", "\v"];
 const TAKEN_ALIAS = [
   "about",

@@ -37,8 +37,10 @@ const Home = () => {
         });
     } else {
       // copy short
-      window.navigator.clipboard.writeText(url);
-      alert("Copied!");
+      window.navigator.clipboard
+        .writeText(url)
+        .then(() => alert("Copied!"))
+        .catch(() => alert("Failed to copy. Please try manually."));
     }
   };
 

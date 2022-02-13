@@ -37,9 +37,10 @@ const Home = () => {
         });
     } else {
       // copy short
-      document.getElementById("header-input").select();
+      const node = document.getElementById("header-input");
+      node.select();
       window.navigator.clipboard
-        .writeText(url)
+        .writeText(node.value)
         .then(() => alert("Copied!"))
         .catch(() => alert("Failed to copy. Please try manually."));
     }

@@ -30,6 +30,7 @@ const SearchInput = ({
             onChange={headerValueCb}
             disabled={disabled}
             placeholder={headerPlaceholderValue}
+            autoFocus
           />
         </div>
         {includeCustom && (

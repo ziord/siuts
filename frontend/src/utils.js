@@ -16,7 +16,7 @@ export const eUrl = () => {
   if (window.location.origin.includes("localhost")) {
     return "http://localhost:5000";
   }
-  return "https://siuts.herokuapp.com";
+  return "";
 };
 
 export const getLocCode = async () => {

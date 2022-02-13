@@ -26,6 +26,7 @@ const SearchInput = ({
           <h3>{headerLabel}</h3>
           <input
             type="text"
+            id="header-input"
             value={headerValue}
             onChange={headerValueCb}
             disabled={disabled}

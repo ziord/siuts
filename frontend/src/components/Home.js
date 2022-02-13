@@ -37,6 +37,7 @@ const Home = () => {
         });
     } else {
       // copy short
+      document.getElementById("header-input").select();
       window.navigator.clipboard
         .writeText(url)
         .then(() => alert("Copied!"))

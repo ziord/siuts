@@ -1,5 +1,5 @@
 const axios = require("axios");
-const { Robin } = require("@ziord/robin");
+const { Robin, DOMFilter } = require("@ziord/robin");
 const { StatusCodes } = require("http-status-codes");
 const { ngQuery, puncts } = require("../config/conf");
 
@@ -39,22 +39,22 @@ const extractData = (robin, elem, query) => {
   // image url, description, price range,
   const data = {};
   // *extract img-url using path
-  const path = robin.path(elem, true);
   try {
-      const img = path.queryOne("//*[@class='img-c']/following::img");
+      const img = robin.dom(robin.dom(elem).find({filter: DOMFilter.AttributeFilter({class: "img-c"})})).find("img");
       data.imgUrl = img.getAttributeNode("data-src").value;
+
   } catch (e) {
       data.imgUrl = "";
   }
-  // *extract product description using path
+  // *extract product description using dom
   try {
-      data.desc = path.queryOne("//*[@class='name']/text()").value.trim();
+      data.desc = robin.dom(elem).find({filter: DOMFilter.AttributeFilter({class: "name"})}).stringValue().trim();
   } catch (e) {
       data.desc = "";
   }
-  // *extract product description using path
+  // *extract product price using dom
   try {
-      data.price = path.queryOne("//*[@class='prc']/text()").value.replace(/[₦,]/g, "").trim();
+      data.price = robin.dom(elem).find({filter: DOMFilter.AttributeFilter({class: "prc"})}).stringValue().replace(/[₦,]/g, "").trim();
   } catch (e) {
       data.price = "";
   }
@@ -67,18 +67,17 @@ function getQ(query) {
 }
 
 async function ngFind(query) {
-    const q = getQ(query);
-    const resp = await axios.get(`${ngQuery}${q}`);
-    const robin = new Robin(resp.data, "HTML");
-    // console.log(robin.prettify());
-    const items = [];
-    robin.path(robin.getRoot()).queryAll("//*[@class='core']").forEach((elem) => {
-        const data = extractData(robin, elem, query);
-        if (data.desc && data.price) {
-            items.push(data);
-        }
-    });
-    return items;
+  const q = getQ(query);
+  const resp = await axios.get(`${ngQuery}${q}`);
+  const robin = new Robin(resp.data, "HTML");
+  const items = [];
+  robin.dom(robin.getRoot()).findAll({filter: DOMFilter.AttributeFilter({class: "core"})}).forEach((elem) => {
+      const data = extractData(robin, elem, query);
+      if (data.desc && data.price) {
+          items.push(data);
+      }
+  });
+  return items;
 }
 
 const find = async (query, mode) => {
